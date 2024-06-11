@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>focus (ver. 0.1)</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>    
+	<h1 th:text="|${msgHeader}|" />
+	<p th:text="|code: ${hash}|" />
+	<p th:text="------------------------------" />
+    <p th:text="|${textBody}!|" />
+    
+    <!--  tbody>    
+    <tr th:each="MessageDto: ${message}">
+        <td th:text="${MessageDto.hash}" />
+        <td th:text="${MessageDto.textBody}" />
+    </tr>
+</tbody-->
+    
+</body>
+</html>
