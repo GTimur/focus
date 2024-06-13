@@ -61,8 +61,16 @@ public class MessagesReader {
 			while ((line = br.readLine()) != null) {
 				// System.out.println("line:"+line);
 				if (line.startsWith("*")) {
+					
+					if (!prev.startsWith("---") && textBody != null && !textBody.equals("")) {
+						messageDto = new MessageDto(new ArrayList<String>(sections), timeStamp, textBody,
+								textBody.hashCode());
+						messagesList.add(messageDto);
+						textBody = "";
+					}
+					
 					level = utl.getHLevel(line);
-
+					
 					if (curLevel < level) {
 						while (curLevel < level - 1) {
 							sections.add(""); // empty header (when missed)
@@ -70,7 +78,7 @@ public class MessagesReader {
 						}
 						sections.add(line.replace("* ", "").replace("*", ""));
 						curLevel++;
-					} else if (curLevel >= level) {
+					}	else if (curLevel >= level) {
 						while (curLevel >= level) {
 							sections.remove(sections.size() - 1);
 							curLevel--;
@@ -78,13 +86,7 @@ public class MessagesReader {
 						sections.add(line.replace("* ", "").replace("*", ""));
 						curLevel++;
 					}
-
-					if (!prev.startsWith("---") && textBody != null && !textBody.equals("")) {
-						messageDto = new MessageDto(new ArrayList<String>(sections), timeStamp, textBody,
-								textBody.hashCode());
-						messagesList.add(messageDto);
-						textBody = "";
-					}
+					
 				} else if (line.startsWith("---")) {
 					if (textBody != null && !textBody.equals("")) {
 						messageDto = new MessageDto(new ArrayList<String>(sections), timeStamp, textBody,

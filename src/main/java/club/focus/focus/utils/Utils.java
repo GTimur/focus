@@ -7,7 +7,7 @@ public class Utils {
 			for (int i = 0; i < header.length(); i++) {
 				if (header.charAt(i) == '*') {
 					count++;
-				} else if (header.charAt(i) == ' ') {
+				} else if (header.charAt(i) != '*') {
 					break;
 				}
 			}
